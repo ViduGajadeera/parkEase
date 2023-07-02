@@ -1,3 +1,10 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>ParkEase-ENTRANCE</title> 
+<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <style type="text/css">
 
 @import "compass/css3";
@@ -123,7 +130,7 @@
 }
 
 .body{
-	background: #35302d;
+	background: #302f2f;
 
 
 
@@ -149,9 +156,10 @@ width: 100%;
 .formee{
 
 	padding: 50px; 
-	margin-left: 280px;
-}
-
+	margin-left: 250px;
+  opacity: 0.9;
+  
+} 
 
 section{
     width: 100%;
@@ -163,4 +171,67 @@ section{
      position: absolute;
 }
 
+
 </style>
+
+
+
+
+</head>
+<body> 
+	<section>
+	<div class="navbar navbar-inverse navbar-static-top">
+		<div id="div">
+  <div class="container">
+    <div align="center" id="heed" ><h3> <b> AUTOMATED PARKING MANAGEMENT SYSTEM </b></h3></div>
+
+    </div>
+  </div>
+
+
+
+
+<header class="header" role="banner">
+  <h1 class="logo">
+  	<table><tr><td>
+  	<img src="logo.png" height="80px" width="80px"></td> 
+
+    <td><a href="#">Park <span>Ease</span></a></td>
+    </tr>
+</table>
+  </h1>
+  <div class="nav-wrap">
+    <nav class="main-nav" role="navigation">
+      <ul class="unstyled list-hover-slide">
+        <li><a href="Ohome1.php">HOME</a></li>
+        <li><a href="gateIn.php">GATE IN</a></li>
+        <li><a href="gateOut.php">DEPARTURE</a></li>
+        
+      </ul>
+    </nav>
+   <!-- <ul class="social-links list-inline unstyled list-hover-slide">
+      <li><a href="#">Twitter</a></li>
+      <li><a href="#">Google+</a></li>
+      <li><a href="#">GitHub</a></li>
+      <li><a href="#">CodePen</a></li>
+    </ul>-->
+  </div>
+</header>
+</div>
+
+
+
+
+
+
+
+</div>
+
+  
+  </section>      
+
+
+</body>
+
+
+</html>

@@ -17,10 +17,10 @@
 
 
 </head>
-<body>  
-	<section> 
-	<div class="navbar navbar-inverse navbar-static-top">
-		<div id="div">
+<body> 
+  <section>
+  <div class="navbar navbar-inverse navbar-static-top">
+    <div id="div">
   <div class="container">
     <div align="center" id="heed" ><h3> <b> AUTOMATED PARKING MANAGEMENT SYSTEM </b></h3></div>
 
@@ -32,8 +32,8 @@
 
 <header class="header" role="banner">
   <h1 class="logo">
-  	<table><tr><td>
-  	<img src="logo.png" height="80px" width="80px"></td> 
+    <table><tr><td>
+    <img src="logo.png" height="80px" width="80px"></td> 
 
     <td><a href="#">Park <span>Ease</span></a></td>
     </tr>
@@ -42,16 +42,21 @@
   <div class="nav-wrap">
     <nav class="main-nav" role="navigation">
       <ul class="unstyled list-hover-slide">
-        <li><a href="">HOME</a></li>
-        <li><a href="index.html">STAFF REGISTRATION</a></li>
-        <li><a href="#">RESERVATIONS</a></li>
-        <li><a href="">GATE IN</a></li>
-        <li><a href="#">DEPARTURE</a></li>
-        <li><a href="#">REPORTS</a></li>
-        <li><a href="#">FEEDBACKS</a></li>
+        <li><a href="home1.php">HOME</a></li>
+        <li><a href="staffReg.php">STAFF REGISTRATION</a></li>
+        <li><a href="reservation.php">RESERVATIONS</a></li>
+        <li><a href="gateIn.php">GATE IN</a></li>
+        <li><a href="gateOut.php">DEPARTURE</a></li>
+        <li><a href="report.php">REPORTS</a></li>
+        <li><a href="feedback.php">FEEDBACKS</a></li>
       </ul>
     </nav>
-   
+   <!-- <ul class="social-links list-inline unstyled list-hover-slide">
+      <li><a href="#">Twitter</a></li>
+      <li><a href="#">Google+</a></li>
+      <li><a href="#">GitHub</a></li>
+      <li><a href="#">CodePen</a></li>
+    </ul>-->
   </div>
 </header>
 </div>
@@ -72,10 +77,10 @@
         <label class="col-md-4 control-label">SELECT EMPLOYEE TYPE</label> 
 
         <div class="col-md-4 inputGroupContainer"> 
-          <table><tr><td align="left" class="form-control">
-        <input type="radio" name="emptype" value="permanent"><b>PERMANENT </b></td> <td colspan="1"></td>  <td align="right" class="form-control"><input type="radio" name="emptype" value="contract"> <b>CONTRACT </b></td>
-        </tr>
-        </table>
+          <div></div>
+          
+        <input type="radio" name="emptype" value="permanent"><b>PERMANENT </b> &nbsp&nbsp&nbsp <input type="radio" name="emptype" value="contract"> <b>CONTRACT </b>
+        
        
         </div>
       </div>
@@ -132,10 +137,9 @@
         <label class="col-md-4 control-label">GENDER</label> 
 
         <div class="col-md-4 inputGroupContainer"> 
-          <table><tr><td align="left" class="form-control">
-        <input type="radio" name="gender" value="male"><b>MALE  &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp </b></td> <td colspan="1"></td>  <td align="right" class="form-control"><input type="radio" name="gender" value="female"> <b>FEMALE </b></td>
-        </tr>
-        </table>
+        
+        <input type="radio" name="gender" value="male"><b>MALE</b> &nbsp&nbsp&nbsp <input type="radio" name="gender" value="female"> <b>FEMALE </b>
+        
          
         </div>
       </div>

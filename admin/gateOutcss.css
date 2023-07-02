@@ -28,7 +28,7 @@
   top: 0;
   bottom: 0;
   width: 17.5em;
-  background: #35302D;
+  background: #302f2f;
 }
 
 .logo {
@@ -123,13 +123,13 @@
 }
 
 .body{
-	background: #35302d;
+	background: #302f2f;
 
 
 
 }
 #div{
-background-color:#35302d;
+background-color:#302f2f;
 padding: 18px; 
 position: fixed;
 width: 100%;

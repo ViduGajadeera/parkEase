@@ -5,7 +5,7 @@
 <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700' rel='stylesheet' type='text/css'>
 <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-<link rel="stylesheet" type="text/css" href="gateOutCss.css">
+<link rel="stylesheet" type="text/css" href="gateOut.css">
 
 <script>
 
@@ -122,13 +122,10 @@ display_c5()
   <div class="nav-wrap">
     <nav class="main-nav" role="navigation">
       <ul class="unstyled list-hover-slide">
-        <li><a href="home1.php">HOME</a></li>
-        <li><a href="staffReg.php">STAFF REGISTRATION</a></li>
-        <li><a href="reservation.php">RESERVATIONS</a></li>
+        <li><a href="Ohome1.php">HOME</a></li>
         <li><a href="gateIn.php">GATE IN</a></li>
         <li><a href="gateOut.php">DEPARTURE</a></li>
-        <li><a href="report.php">REPORTS</a></li>
-        <li><a href="feedback.php">FEEDBACKS</a></li>
+        
       </ul>
     </nav>
    <!-- <ul class="social-links list-inline unstyled list-hover-slide">
