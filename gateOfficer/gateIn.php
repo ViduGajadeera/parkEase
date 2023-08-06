@@ -1,6 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head>
+   <?php  
+
+
+session_start();
+ if(isset($_SESSION['username'])){ 
+  ?>
 	<title>ParkEase-ENTRANCE</title> 
 <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700' rel='stylesheet' type='text/css'>
 <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
@@ -221,16 +227,14 @@ display_c5()
       <ul class="unstyled list-hover-slide">
         <li><a href="Ohome1.php">HOME</a></li>
         <li><a href="gateIn.php">GATE IN</a></li>
+        <li><a href="reservationIn.php">RESERVATION - GATE IN</a></li>
         <li><a href="gateOut.php">DEPARTURE</a></li>
+        <li><a href="pricing.php">PRICING</a></li>
+        <li><a href="Ologout.php">LOGOUT</a></li>
         
       </ul>
     </nav>
-   <!-- <ul class="social-links list-inline unstyled list-hover-slide">
-      <li><a href="#">Twitter</a></li>
-      <li><a href="#">Google+</a></li>
-      <li><a href="#">GitHub</a></li>
-      <li><a href="#">CodePen</a></li>
-    </ul>-->
+ 
   </div>
 </header>
 </div>
@@ -385,4 +389,10 @@ if($scat2[0]==5){
 
 
  ?>
+ <?php   
+}else{
+  header('location: officerLogin.php');
+}
+
+?>
 </html>

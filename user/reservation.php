@@ -1,32 +1,70 @@
 <!DOCTYPE html>
 <html>
 <head>
+   <?php  
+
+
+session_start();
+ if(isset($_SESSION['username'])){ 
+  ?>
+
   <title>Slot-Reservation</title>
              <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700' rel='stylesheet' type='text/css'>
               <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
               <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-              <link rel="stylesheet" type="text/css" href="templateCss.css">
+              <link href="https://fonts.googleapis.com/css?family=Raleway:400,700" rel="stylesheet">
+             <link rel="stylesheet" type="text/css" href="templateCss.css">
              <link type="text/css" rel="stylesheet" href="reservationCss.css" />
+
            
 
 
       <?php 
-            include 'connection.php'; 
-
+            
 
     include 'connection.php';
-
+ $uid=$_SESSION['id'];
+ $date=date("Y/m/d");
     if(isset($_POST['sub'])){
     $name=$_POST['name'];
     $phone=$_POST['phone'];
-    $vno=$_POST['vno'];
-    $date=$_POST['date'];
+   // $vno=$_POST['vno'];
+    //$date=$_POST['date'];
     $timef=$_POST['timef'];
     $timet=$_POST['timet'];
-    $cat=$_POST['cat'];
+    
+   
 
 
-     $sql="insert into slot_reservation values ('$name','$phone','$vno','$cat','$date','$timef','$timet','')";
+$sql = " SELECT * FROM customer where cus_id='$uid'";
+         $result = mysqli_query($conn, $sql);
+         while( $row = mysqli_fetch_assoc($result)) {
+         $users[]=$row;
+    foreach($users as $user)
+
+       $vcat= $user['cus_vcat'];
+      $vno=$user['cus_vno'];
+
+      if($user['cus_vcat']=="car"){
+        $zone="Zone A";
+      
+      }else if($user['cus_vcat']=="van"){
+          $zone="Zone A";
+         
+      }else if($user['cus_vcat']=="Motor Bike"){
+          $zone="Zone B";
+   
+      }else if($user['cus_vcat']=="Three Wheel"){
+          $zone="Zone C"; 
+
+      }else if($user['cus_vcat']=="Other"){
+          $zone="Zone D";
+      
+      }
+
+
+
+     $sql="insert into slot_reservation values ('$name','$phone','$vno','$vcat','$zone','$date','$timef','$timet','pending','','$uid')";
 
      if(mysqli_query($conn,$sql)){
 
@@ -34,6 +72,13 @@
 
 }
 }
+}
+
+
+ $query1="SELECT * FROM customer where cus_id='$uid'";
+                                            $result1 = mysqli_query($conn, $query1) or die(mysqli_error($conn));
+                                             
+                                              $roww = mysqli_fetch_array($result1,MYSQLI_ASSOC);
 
   
             
@@ -44,7 +89,8 @@
 
 
 </head>
-<body>  
+<body> 
+<div> 
   <section> 
   <div class="navbar navbar-inverse navbar-static-top">
     <div id="div">
@@ -72,6 +118,7 @@
         <li><a href="Uhome1.php">HOME</a></li>
         <li><a href="reservation.php">MAKE A RESERVATION</a></li>
         <li><a href="Uprofile.php">PROFILE</a></li>
+         <li><a href="logout.php">LOGOUT</a></li>
       
       </ul>
     </nav>
@@ -79,7 +126,7 @@
   </div>
 </header>
 </div>
-<br><br><br>
+<br><br>
   <div id="booking" class="section">
     <div class="section-center">
       <div class="container">
@@ -99,29 +146,26 @@
                 <span class="form-label">Phone</span>
               </div>
 
-              <div class="form-group">
-                <input class="form-control" type="text" placeholder="Enter your Vehicle Number" required="" name="vno">
+      
+           
+
+            <!--  <div class="form-group">
+                <input class="form-control" type="text" placeholder="<?php //echo (roww['cus_vno'])  ?>" required="" name="vno" value="">
                 <span class="form-label">Vehicle Number</span>
               </div>
 
               <div class="form-group">
-								<select class="form-control" required name="cat">
-									<option value="" label="&nbsp;" selected hidden></option>
-									<option value="A">Car/Van</option>
-									<option value="B">Motor Bike</option>
-									<option value="C">Three Wheel</option>
-									<option value="D">Other</option>
-								</select>
-								<span class="select-arrow"></span>
-								<span class="form-label">Vehicle Category</span>
-							</div>
-              
+                <input class="form-control" type="text" placeholder="<?php //echo roww['cus_vcat'];  ?>" required="" name="vno">
+                <span class="form-label">Vehicle Category</span>
+              </div>
+-->
+   
               
               <div class="form-group">
               <div class="col-md-13">
                   <div class="form-group">
-                    <input class="form-control" type="date" required name="date">
-                    <span class="form-label">Date of Reservation</span>
+                    <input class="form-control" type="text" required name="date" placeholder="<?php  echo (date("Y/m/d")); ?>" disabled="disabled">
+                    <span class="form-label">Date Of Reservation</span>
                   </div>
                 </div>
               </div>
@@ -175,6 +219,13 @@
   
         
 </section>
-
+</div>
 </body>
+
+<?php   
+}else{
+  header('location: userLogin.php');
+}
+
+?>
 </html>

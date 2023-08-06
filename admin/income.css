@@ -149,7 +149,8 @@ width: 100%;
 .formee{
 
   padding: 40px; 
-  margin-left: 280px;
+  margin-left: 20px;
+  margin-top: 50px;
 
 }
 
@@ -162,6 +163,9 @@ section{
      background-size: cover;
      background-position: center;
      position: absolute;
+
+
+     
 }
 
 </style>

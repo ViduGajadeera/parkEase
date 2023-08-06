@@ -1,10 +1,20 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>ParkEase-ENTRANCE</title> 
+  <?php  
+
+
+session_start();
+ if(isset($_SESSION['username'])){ 
+  ?>
+	<title>ParkEase-Feedback</title> 
 <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700' rel='stylesheet' type='text/css'>
 <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+<link rel="stylesheet" href="feedback.css">
+
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+
+
 <style type="text/css">
 
 @import "compass/css3";
@@ -165,6 +175,7 @@ section{
     width: 100%;
     height: 100%;
     background-image:url(back3.jpg);
+   /* background-color: #242426;*/
      background-blend-mode: darken;
      background-size: cover;
      background-position: center;
@@ -172,29 +183,19 @@ section{
 }
 
 
+
+
 </style>
+<?php 
+      include 'connection.php';
 
-<script>
 
-function display_ct5() {
-var x = new Date()
-var ampm = x.getHours( ) >= 12 ? ' PM' : ' AM';
-
-var x1 = x.getHours( )+ ":" +  x.getMinutes() + ":" +  x.getSeconds() + ampm;
-document.getElementById('ct5').innerHTML = x1;
-display_c5();
- }
- function display_c5(){
-var refresh=1000; 
-mytime=setTimeout('display_ct5()',refresh)
-}
-display_c5()
-</script>
+?>
 
 
 
 </head>
-<body onload=display_ct5();> 
+<body> 
 	<section>
 	<div class="navbar navbar-inverse navbar-static-top">
 		<div id="div">
@@ -217,32 +218,78 @@ display_c5()
 </table>
   </h1>
   <div class="nav-wrap">
-    <nav class="main-nav" role="navigation">
+       <nav class="main-nav" role="navigation">
       <ul class="unstyled list-hover-slide">
         <li><a href="home1.php">HOME</a></li>
         <li><a href="staffReg.php">STAFF REGISTRATION</a></li>
-        <li><a href="reservation.php">RESERVATIONS</a></li>
+        <li><a href="Areservation.php">RESERVATIONS</a></li>
+        <li><a href="RgateIn.php">RESERVATION - GATE IN</a></li>
         <li><a href="gateIn.php">GATE IN</a></li>
         <li><a href="gateOut.php">DEPARTURE</a></li>
         <li><a href="report.php">REPORTS</a></li>
+        <li><a href="pricing.php">PRICING</a></li>
         <li><a href="feedback.php">FEEDBACKS</a></li>
+         <li><a href="Alogout.php">LOGOUT</a></li>
       </ul>
     </nav>
-   <!-- <ul class="social-links list-inline unstyled list-hover-slide">
-      <li><a href="#">Twitter</a></li>
-      <li><a href="#">Google+</a></li>
-      <li><a href="#">GitHub</a></li>
-      <li><a href="#">CodePen</a></li>
-    </ul>-->
+  
   </div>
 </header>
 </div>
+<br><br><br><br>
 
+<div class="containeer">
+  <table class="table">
+    <thead>
+      <tr>
+        <th class="th">Name</th>
+        <th class="th">Address</th>
+        <th class="th">Mobile</th>
+        <th class="th">Email</th>
+        <th class="th">Service</th>
+        <th class="th">Price</th>
+        <th class="th">Customer Support</th>
+        <th class="th">Recommendation</th>
+        <th class="th">Suggestions</th>
+        
+      </tr>
+    </thead>
 
+    <?php   
 
+                                                     $sql = " SELECT * FROM cus_feedback order by 'feedback_id' DESC";
 
+                                                     $result = mysqli_query($conn, $sql);
+                                                     while( $row = mysqli_fetch_assoc($result)) {
+                                                            $feeds[]=$row;
+                                                            foreach($feeds as $feed)
+                                                           
 
+                                                       
+                                                       
 
+    ?>
+    <tbody>
+      <tr>
+        <?php if(mysqli_num_rows($result)>0){ ?>
+        <td class="td"><?php echo $feed['name']?></td>
+        <td class="td"><?php echo $feed['address']?></td>
+        <td class="td"><?php echo $feed['mobile']?></td>
+        <td class="td"><?php echo $feed['mail']?></td>
+        <td class="td"><?php echo $feed['service_rating']?></td>
+        <td class="td"><?php echo $feed['price_rating']?></td>
+        <td class="td"><?php echo $feed['cSupport_rating']?></td>
+        <td class="td"><?php echo $feed['recommendation']?></td>
+        <td class="td"><?php echo $feed['suggestions']?></td>
+      </tr>
+     
+    </tbody>
+    <?php   
+        }
+      }
+    ?>
+  </table>
+</div>
 
 </div>
 
@@ -252,5 +299,10 @@ display_c5()
 
 </body>
 
+<?php   
+}else{
+  header('location: admin_login.php');
+}
 
+?>
 </html>

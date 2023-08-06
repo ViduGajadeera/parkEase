@@ -11,6 +11,8 @@ session_start();
 <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700' rel='stylesheet' type='text/css'>
 <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<link rel="stylesheet" href="tarrifTbl.css">
+             <link type="text/css" rel="stylesheet" href="Areservation.css" />
 <style type="text/css">
 
 @import "compass/css3";
@@ -178,91 +180,6 @@ section{
 }
 
 
-/*tiles*/
-
-* {
-  box-sizing: border-box;
-}
-
-:root {
-  --background: #e5ffb3;
-  --background-accent: #dbf8a3;
-  --background-accent-2: #bde66e;
-  --light: #92de34;
-  --dark: #69bc22;
-  --text: #025600;
-}
-
-body {
-  background-color: var(--background);
-  background-image: linear-gradient(
-      var(--background-accent-2) 50%,
-      var(--background-accent) 50%
-    ),
-    linear-gradient(
-      var(--background-accent) 50%,
-      var(--background-accent-2) 50%
-    );
-  background-repeat: no-repeat;
-  background-size: 100% 30px;
-  background-position: top left, bottom left;
-  min-height: 98vh;
-}
-
-.d {
-  display: block;
-  width: 400px;
-  margin: 0 auto 0 auto;
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 30vh;
-}
-
-button {
-  display: block;
-  cursor: pointer;
-  outline: none;
-  border: none;
-  background-color: var(--light);
-  width: 400px;
-  height: 70px;
-  border-radius: 30px;
-  font-size: 1.5rem;
-  font-weight: 600;
-  color: var(--text);
-  background-size: 100% 100%;
-  box-shadow: 0 0 0 7px var(--light) inset;
-  margin-bottom: 15px;
-}
-
-button:hover {
-  background-image: linear-gradient(
-    145deg,
-    transparent 10%,
-    var(--dark) 10% 20%,
-    transparent 20% 30%,
-    var(--dark) 30% 40%,
-    transparent 40% 50%,
-    var(--dark) 50% 60%,
-    transparent 60% 70%,
-    var(--dark) 70% 80%,
-    transparent 80% 90%,
-    var(--dark) 90% 100%
-  );
-  animation: background 3s linear infinite;
-}
-
-@keyframes background {
-  0% {
-    background-position: 0 0;
-  }
-  100% {
-    background-position: 400px 0;
-  }
-}
-
-
 </style>
 
 
@@ -270,7 +187,7 @@ button:hover {
 
 
 </head>
-<body> 
+<body onload=display_ct5();> 
 	<section>
 	<div class="navbar navbar-inverse navbar-static-top">
 		<div id="div">
@@ -293,7 +210,7 @@ button:hover {
 </table>
   </h1>
   <div class="nav-wrap">
-       <nav class="main-nav" role="navigation">
+         <nav class="main-nav" role="navigation">
       <ul class="unstyled list-hover-slide">
         <li><a href="home1.php">HOME</a></li>
         <li><a href="staffReg.php">STAFF REGISTRATION</a></li>
@@ -307,18 +224,107 @@ button:hover {
          <li><a href="Alogout.php">LOGOUT</a></li>
       </ul>
     </nav>
-   
+  
   </div>
 </header>
 </div>
 
 
-<div class="d">
 
-  <button onclick="location.href = 'income.php';">Monthly Income</button>
-  <button onclick="location.href = 'most.php';">Parked Vehicles Summary</button>
-  
+<div class="containeer">
+  <table class="table">
+    <thead>
+      <th class="the">Charges per Hour For Non-Registered Customers</th>
+      <tr>
+        <th class="th">Category ID</th>
+        <th class="th">Category</th>
+        <th class="th">Charges per Hour (Rs)</th>
+        
+        
+        
+      </tr>
+    </thead>
+
+    <?php   
+
+             include 'connection.php'; 
+                                                     $sql = " SELECT * FROM tarrif where userType='unregistered'";
+
+                                                     $result = mysqli_query($conn, $sql);
+                                                     while( $row = mysqli_fetch_assoc($result)) {
+                                                            $tarrifs[]=$row;
+                                                            foreach($tarrifs as $tarrif)
+                                                           
+
+                                                       
+                                                    
+
+    ?>
+    <tbody>
+      <tr>
+        <?php if(mysqli_num_rows($result)>0){ ?>
+        <td class="td"><?php echo $tarrif['tarrif_id']?></td>
+        <td class="td"><?php echo $tarrif['category']?></td>
+      <td class="td"><?php echo $tarrif['price']?> </td>
+        
+        
+
+      </tr>
+     <?php   
+        }
+      }
+    ?>
+
+    <th class="the">Charges per 8 Hours for Registered Customers</th>
+    <tr>
+        <th class="th">Category ID</th>
+        <th class="th">Category</th>
+        <th class="th">Charges for 8 Hours (Rs)</th>
+        
+        
+        
+      </tr>
+
+
+    <?php   
+
+             include 'connection.php'; 
+                                                     $sql = " SELECT * FROM tarrif where userType='registered' and tarrif_id>4";
+
+                                                     $result = mysqli_query($conn, $sql);
+                                                     while( $row = mysqli_fetch_assoc($result)) {
+                                                            $tarrifs[]=$row;
+                                                            foreach($tarrifs as $tarrif)
+                                                           
+
+                                                       
+                                                    
+
+    ?>
+    <tbody>
+      <tr>
+        <?php if(mysqli_num_rows($result)>0){ ?>
+        <td class="td"><?php echo $tarrif['tarrif_id']?></td>
+        <td class="td"><?php echo $tarrif['category']?></td>
+        <td class="td"> <?php echo $tarrif['price']?></td>
+        
+        <?php  
+          $id=$tarrif['tarrif_id'];
+        ?>
+
+      </tr>
+     <?php   
+        }
+      }
+    ?>
+    </tbody>
+    
+            
+
+    
+  </table>
 </div>
+
 
 
 
@@ -330,11 +336,11 @@ button:hover {
 
 
 </body>
+
 <?php   
 }else{
   header('location: admin_login.php');
 }
 
 ?>
-
 </html>

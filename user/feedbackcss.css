@@ -95,7 +95,8 @@
       } 
 
       body,form {
-    background-image: url('back3.jpeg');
+    /*background-image: url('back4.jpeg');8*/
+    background-color: black;
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;

@@ -2,7 +2,6 @@
 body{
 	/*background-image:url('back3.jpeg');*/
 	background-color: #242426;
-	margin-left: 8px;
 }
 
 .section {
@@ -32,7 +31,7 @@ body{
 	width: 100%;
 	margin: 150px;
 	background: #1a1b1d;
-	
+	padding-bottom: 20px;
 	
 	
 }
@@ -49,10 +48,8 @@ body{
 }
 
 .booking-form>form {
-	margin-left: 310px;
+	margin-left: 30px;
 	padding: 30px;
-	margin-bottom: 50px;
-
 }
 
 .booking-form .form-header {

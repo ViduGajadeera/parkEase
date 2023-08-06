@@ -127,6 +127,7 @@
 
 
 
+
 }
 #div{
 background-color:#302f2f;
@@ -148,20 +149,28 @@ width: 100%;
 
 .formee{
 
-  padding: 40px; 
-  margin-left: 280px;
-
-}
+height: 100%;
 
 
-section{
-    width: 100%;
-    height: 800px;
+  width: 100%;
+  
     background-image:url(back3.jpg);
      background-blend-mode: darken;
      background-size: cover;
      background-position: center;
      position: absolute;
+     background-attachment: fixed;
+    
+     display:inline-block;
+     clear: both;
+
+    
+
+
+     
+}
+form{
+  margin: 100px;
 }
 
 </style>

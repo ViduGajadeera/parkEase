@@ -1,11 +1,18 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>ParkEase-EXIT</title> 
+   <?php  
+
+
+session_start();
+ if(isset($_SESSION['username'])){ 
+  ?>
+
+  <title>ParkEase-EXIT</title> 
 <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700' rel='stylesheet' type='text/css'>
 <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-<link rel="stylesheet" type="text/css" href="gateOut.css">
+<link rel="stylesheet" type="text/css" href="gateout.css">
 
 <script>
 
@@ -39,22 +46,15 @@ display_c5()
   $sql2="select * from zoneb where vehicleNo='$vno'";
   $sql3="select * from zonec where vehicleNo='$vno'";
   $sql4="select * from zoned where vehicleNo='$vno'";
-  $sql5="select * from gate_transactions where vNumber='$vno'";
+ 
 
   $result1 = mysqli_query($conn, $sql1);
   $result2 = mysqli_query($conn, $sql2);
   $result3 = mysqli_query($conn, $sql3);
   $result4 = mysqli_query($conn, $sql4);
-  $result5= mysqli_query($conn, $sql5);
 
 
-    while( $row = mysqli_fetch_assoc($result5)) {
-                                                            $vehicles[]=$row;
-                                                            foreach($vehicles as $vehicle)
-                                                           $id= $row['vNumber'];
 
-                                                       
-                                                       if(mysqli_num_rows($result5)>0){}}
 
   if(mysqli_num_rows($result1)>0){
     $num=1;
@@ -98,9 +98,9 @@ display_c5()
 
 </head>
 <body>  
-	<section>
-	<div class="navbar navbar-inverse navbar-static-top">
-		<div id="div">
+  <section>
+  <div class="navbar navbar-inverse navbar-static-top">
+    <div id="div">
   <div class="container">
     <div align="center" id="heed" ><h3> <b> AUTOMATED PARKING MANAGEMENT SYSTEM </b></h3></div>
 
@@ -112,55 +112,51 @@ display_c5()
 
 <header class="header" role="banner">
   <h1 class="logo">
-  	<table><tr><td>
-  	<img src="logo.png" height="80px" width="80px"></td> 
+    <table><tr><td>
+    <img src="logo.png" height="80px" width="80px"></td> 
 
     <td><a href="#">Park <span>Ease</span></a></td>
     </tr>
 </table>
   </h1>
   <div class="nav-wrap">
-    <nav class="main-nav" role="navigation">
+   <nav class="main-nav" role="navigation">
       <ul class="unstyled list-hover-slide">
         <li><a href="Ohome1.php">HOME</a></li>
         <li><a href="gateIn.php">GATE IN</a></li>
+        <li><a href="reservationIn.php">RESERVATION - GATE IN</a></li>
         <li><a href="gateOut.php">DEPARTURE</a></li>
+        <li><a href="pricing.php">PRICING</a></li>
+        <li><a href="Ologout.php">LOGOUT</a></li>
         
       </ul>
     </nav>
-   <!-- <ul class="social-links list-inline unstyled list-hover-slide">
-      <li><a href="#">Twitter</a></li>
-      <li><a href="#">Google+</a></li>
-      <li><a href="#">GitHub</a></li>
-      <li><a href="#">CodePen</a></li>
-    </ul>-->
+  
   </div>
 </header>
 </div>
 <div class="formee"> 
 <div class="container">
 
- <form class="well form-horizontal" action=" " method="post" id="contact_form">
+ <form class="well form-horizontal" action="gateOutTicket.php" method="post" id="contact_form">
     <fieldset>
 
-      <!-- Form Name -->
+     
       <legend>
         <center>
           <h2><b>Departure</b></h2>
         </center>
       </legend><br>
 
-      <!-- Text input-->
+    
      
-
-      <!-- Text input-->
 
       <div class="form-group">
         <label class="col-md-4 control-label">VEHICLE NO</label>
         <div class="col-md-4 inputGroupContainer">
           <div class="input-group">
             <span class="input-group-addon"><i class="glyphicon glyphicon-barcode"></i></span>
-            <input name="VNO" placeholder="ENTER VEHICLE NUMBER" class="form-control" type="text"> 
+            <input name="VNO" placeholder="ENTER VEHICLE NUMBER" class="form-control" type="text" required> 
           </div>
         </div>
       </div>
@@ -176,7 +172,7 @@ display_c5()
 
 
 
-      <!-- Text input-->
+      
 
       <div class="form-group">
         <label class="col-md-4 control-label">DATE</label>
@@ -212,7 +208,7 @@ display_c5()
 
 
 
-      <!-- Button -->
+      
       <div>
         <label class="col-md-4 control-label"></label>
         <div>
@@ -225,7 +221,7 @@ display_c5()
     </fieldset>
   </form>
 </div>
-</div><!-- /.container -->
+</div>
 
 </div>
 
@@ -234,4 +230,10 @@ display_c5()
 </section>
 
 </body>
+<?php   
+}else{
+  header('location: officerLogin.php');
+}
+
+?>
 </html>

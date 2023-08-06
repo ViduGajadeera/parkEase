@@ -2,58 +2,9 @@
 <html>
 <head>
   <?php  
-  
+
+
 session_start();
-
-
-// automaticallt cancel reservation starts
-
-  function clear(){
-    include 'connection.php';
-  date_default_timezone_set("Asia/colombo");
-   $today=date("Y-m-d");
-  $now= date('H:i:s');
-
-  $vacant="select * from slot_reservation where reservation_date<'$today' or time_from<='$now'";
-   $ans = mysqli_query($conn, $vacant);
-          while( $line = mysqli_fetch_assoc($ans)) {
-          $arrs[]=$line;
-          foreach($arrs as $arr)
-
-          $vehicleno=$arr['vehicle_no'];
-          $catt=$arr['vCat'];
-
-          if($arr['vCat']=="car"){
-        $correct="update zonea set vehicleNo='', status='vacant', reservationStatus='no' where vehicleNo='$vehicleno' and status='vacant'";
-          mysqli_query($conn,$correct);
-
-        }else if($arr['vCat']=="van"){
-           $correct="update zonea set vehicleNo='', status='vacant', reservationStatus='no' where vehicleNo='$vehicleno' and status='vacant'";
-          mysqli_query($conn,$correct);
-        }else if($arr['vCat']=="Motor Bike"){
-           $correct="update zoneb set vehicleNo='', status='vacant', reservationStatus='no' where vehicleNo='$vehicleno' and status='vacant'";
-          mysqli_query($conn,$correct);
-        }else if($arr['vCat']=="Three Wheel"){
-           $correct="update zonec set vehicleNo='', status='vacant', reservationStatus='no' where vehicleNo='$vehicleno' and status='vacant'";
-          mysqli_query($conn,$correct);
-        }
-        else if($arr['vCat']=="Other"){
-           $correct="update zoned set vehicleNo='', status='vacant', reservationStatus='no' where vehicleNo='$vehicleno' and status='vacant'";
-          mysqli_query($conn,$correct);
-        }
-      }
-
-  $clear="update slot_reservation set status='Expired' where reservation_date<'$today' or time_from<='$now'";
-  mysqli_query($conn,$clear);
-  }
-
-
-// automatically cancel reservation ends
-
-
-
-
-
  if(isset($_SESSION['username'])){ 
   ?>
 	<title>ParkEase-ENTRANCE</title> 
@@ -247,7 +198,7 @@ display_c5()
 
 
 </head>
-<body onload=display_ct5();<?php clear(); ?>> 
+<body onload=display_ct5();> 
 	<section>
 	<div class="navbar navbar-inverse navbar-static-top">
 		<div id="div">
@@ -270,7 +221,8 @@ display_c5()
 </table>
   </h1>
   <div class="nav-wrap">
-      <nav class="main-nav" role="navigation">
+  <nav class="main-nav" role="navigation">
+          <nav class="main-nav" role="navigation">
       <ul class="unstyled list-hover-slide">
         <li><a href="home1.php">HOME</a></li>
         <li><a href="staffReg.php">STAFF REGISTRATION</a></li>
@@ -291,7 +243,7 @@ display_c5()
 <div class="formee"> 
 <div class="container">
 
- <form class="well form-horizontal" action="entranceTicket.php" method="post" id="contact_form">
+ <form class="well form-horizontal" action="RentranceTicket.php" method="post" id="contact_form">
     <fieldset>
 
       
@@ -387,7 +339,7 @@ display_c5()
 </body>
 
 <?php  
-if(isset($_POST['btn'])){
+
 switch(VCAT){
   case 0:
   $q="select COUNT(slotNumber) from zonea where status='fill'"; 
@@ -433,7 +385,7 @@ if($scat3[0]==50){
 if($scat2[0]==5){
   echo '<script>alert("car park D is full !")</script>';
 }
-}
+
 
  ?>
 
@@ -441,7 +393,6 @@ if($scat2[0]==5){
 }else{
   header('location: admin_login.php');
 }
-
 
 ?>
 </html>

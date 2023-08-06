@@ -7,13 +7,11 @@
 session_start();
  if(isset($_SESSION['username'])){ 
   ?>
-  <title>ParkEase-Home</title> 
+  <title>ParkEase-Reservation</title> 
 <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700' rel='stylesheet' type='text/css'>
   <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-<link rel="stylesheet" href="Ureservation.css">
-
-<link rel="stylesheet" href="position.css">
+<link rel="stylesheet" href="Areservation.css">
 
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 
@@ -177,8 +175,7 @@ width: 100%;
 section{
     width: 100%;
     height: 100%;
-    background-image:url(back3.png);
-   
+    background-image:url(back3.jpg);
     
      background-blend-mode: darken;
      background-size: cover;
@@ -227,30 +224,25 @@ section{
 </table>
   </h1>
   <div class="nav-wrap">
-     <nav class="main-nav" role="navigation">
+          <nav class="main-nav" role="navigation">
       <ul class="unstyled list-hover-slide">
-        <li><a href="Uhome1.php">HOME</a></li>
-        <li><a href="reservation.php">MAKE A RESERVATION</a></li>
-        <li><a href="Uprofile.php">PROFILE</a></li>
-         <li><a href="logout.php">LOGOUT</a></li>
-      
+        <li><a href="home1.php">HOME</a></li>
+        <li><a href="staffReg.php">STAFF REGISTRATION</a></li>
+        <li><a href="Areservation.php">RESERVATIONS</a></li>
+        <li><a href="RgateIn.php">RESERVATION - GATE IN</a></li>
+        <li><a href="gateIn.php">GATE IN</a></li>
+        <li><a href="gateOut.php">DEPARTURE</a></li>
+        <li><a href="report.php">REPORTS</a></li>
+        <li><a href="pricing.php">PRICING</a></li>
+        <li><a href="feedback.php">FEEDBACKS</a></li>
+         <li><a href="Alogout.php">LOGOUT</a></li>
       </ul>
     </nav>
-   <!-- <ul class="social-links list-inline unstyled list-hover-slide">
-      <li><a href="#">Twitter</a></li>
-      <li><a href="#">Google+</a></li>
-      <li><a href="#">GitHub</a></li>
-      <li><a href="#">CodePen</a></li>
-    </ul>-->
+   
   </div>
 </header>
 </div>
-<?php  
-$uname=$_SESSION['username'];
-$uid=$_SESSION['id'];
 
-
-?>
 <div class="containeer">
   <table class="table">
     <thead>
@@ -263,14 +255,14 @@ $uid=$_SESSION['id'];
         <th class="th">Date</th>
         <th class="th">Time From</th>
         <th class="th">Time To</th>
-        <th class="th"> Undo Reservation</th>
+        <th class="th"><center>Action</center></th>
         
       </tr>
     </thead>
 
     <?php   
 
-                                                     $sql = " SELECT * FROM slot_reservation where status='pending' and cus_id='$uid'";
+                                                     $sql = " SELECT * FROM slot_reservation where status='pending'";
 
                                                      $result = mysqli_query($conn, $sql);
                                                      while( $row = mysqli_fetch_assoc($result)) {
@@ -279,13 +271,13 @@ $uid=$_SESSION['id'];
                                                            
 
                                                        
-                                                    
+                                                      
 
     ?>
     <tbody>
       <tr>
         <?php if(mysqli_num_rows($result)>0){ ?>
-        <td class="td"><?php echo $reservation['reservation_id']?></td>
+        <td class="td"><?php echo $reservation['cus_id']?></td>
         <td class="td"><?php echo $reservation['name']?></td>
         <td class="td"><?php echo $reservation['mobile']?></td>
         <td class="td"><?php echo $reservation['vehicle_no']?></td>
@@ -299,130 +291,90 @@ $uid=$_SESSION['id'];
 
 
         <td class="td">
-          
+          <form method="post" >
 
-        <form action="Uhome1.php" method="post">
-        <input type="submit" class="custom-btn btn-3" value="Delete" name="rej">
-      <!-- <button onclick=" del()" class="custom-btn btn-3">Delete</button>-->
-             </form>
+        <input type="submit" class="custom-btn btn-4" value="Accept" name="acc" > 
+        <input type="submit" class="custom-btn btn-3" value="Reject" name="rej">
+      </form>
+        
         </td>
       </tr>
-     <?php   
-        }
-      }
-    ?>
+     
     </tbody>
-    
+    <?php   
+        }
+      
+    ?>
   </table>
 </div>
-<?php
-$sql = " SELECT * FROM customer where cus_id='$uid'";
-         $result = mysqli_query($conn, $sql);
-         while( $row = mysqli_fetch_assoc($result)) {
-         $users[]=$row;
-    foreach($users as $user)
-      if($user['cus_vcat']=="car"){
-        $zone="Zone A";
-        $vehicle=$user['cus_vno'];
-        $select = " SELECT slotNumber FROM zonea where vehicleNo='$vehicle'";
-
-       
-
-      }else if($user['cus_vcat']=="van"){
-          $zone="Zone A";
-           $vehicle=$user['cus_vno'];
-        $select = " SELECT slotNumber FROM zonea where vehicleNo='$vehicle'";
-
-      
-
-      }else if($user['cus_vcat']=="Motor Bike"){
-          $zone="Zone B";
-           $vehicle=$user['cus_vno'];
-        $select = " SELECT slotNumber FROM zoneb where vehicleNo='$vehicle'";
-
-        
-
-      }else if($user['cus_vcat']=="Three Wheel"){
-          $zone="Zone C";
-           $vehicle=$user['cus_vno'];
-        $select = " SELECT slotNumber FROM zonec where vehicleNo='$vehicle'";
-
-       
-
-      }else if($user['cus_vcat']=="Other"){
-          $zone="Zone D";
-           $vehicle=$user['cus_vno'];
-        $select = " SELECT slotNumber FROM zoned where vehicleNo='$vehicle'";
-
-        
-
-      }
-
-?>
-
-<div id="containerr">
-    <div class="pricetab">
-      <h1> Your Vehicle is Parked at Slot Number : </h1>
-      <div class="price">
-        <?php
-  $resulting = mysqli_query($conn, $select);
-         while( $rows = mysqli_fetch_array($resulting)) {
-         $nos[]=$rows;
-         foreach($nos as $slot)
-       
-         
-         ?>                                                                                                      
-                                                           
-        <h2><?php echo $zone; ?> </br><?php echo $slot['slotNumber']; ?> </h2>
-      </div>
-    </div>
-  </div>
-
-     <?php
-}
-}
-       ?> 
-
-
-
 
 </div>
 
   
-  </section> 
-
-
+  </section>      
 <?php 
-        $sql1 = "delete from slot_reservation where reservation_id=$id";
-   if(isset($_POST['rej'])) {
-             mysqli_query($conn, $sql1);
-             ?>
+        switch ($reservation['zone']) {
+          case 'A':
+            $vno=$reservation['vehicle_no'];
+            $sql2="update zonea set vehicleNo='$vno', reservationStatus='fill' where ((status='vacant') and reservationStatus='no') order by slotNumber limit 1 ";
+            
+            break;
+          
+          case 'B':
+            $vno=$reservation['vehicle_no'];
+             $sql2="update zoneb set vehicleNo='$vno', reservationStatus='fill' where ((status='vacant') and reservationStatus='no') order by slotNumber limit 1 ";
+             
+            break;
 
-             <script type="text/javascript">
+            case 'C':
+            $vno=$reservation['vehicle_no'];
+             $sql2="update zonec set vehicleNo='$vno', reservationStatus='fill' where ((status='vacant') and reservationStatus='no') order by slotNumber limit 1 ";
+              
+            break;
+
+            case 'D':
+            $vno=$reservation['vehicle_no'];
+             $sql2="update zoned set vehicleNo='$vno', reservationStatus='fill' where ((status='vacant') and reservationStatus='no') order by slotNumber limit 1 ";
+              
+            break;
+        }
+
+
+
+
+        $sql1 = "update slot_reservation set status='accepted' where reservation_id=$id";
+        
+   if(isset($_POST['acc'])) {
+             mysqli_query($conn, $sql1);
+              mysqli_query($conn, $sql2);
+              ?>
+
+               <script type="text/javascript">
                
-               window.location.replace("Uhome1.php");
+               window.location.replace("Areservation.php");
 
 
              </script>
 
-
-             <?php
-
+              <?php
+  
+         
         } 
       
-
-    /* if(isset($_POST['rej'])) {
+        $sql2="delete from slot_reservation where reservation_id=$id";
+     if(isset($_POST['rej'])) {
+      mysqli_query($conn, $sql2);
              header("Location: Areservation.php");
     exit();
-        }*/
-
+        }
+}
 ?>
 
 </body>
 
 <?php   
 }else{
-  header('location: userLogin.php');
+  header('location: admin_login.php');
 }
 
 ?>

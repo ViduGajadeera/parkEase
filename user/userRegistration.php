@@ -155,8 +155,182 @@ form .user-details .input-box{
   }
 }
 
+select{
+     height: 45px;
+  width: 100%;
+  outline: none;
+  font-size: 16px;
+  border-radius: 5px;
+  padding-left: 15px;
+  border: 1px solid #ccc;
+  border-bottom-width: 2px;
+  transition: all 0.3s ease;
+}
+
 
       </style>
+
+
+      <?php  
+      include 'connection.php';
+
+            if(isset($_POST['sub'])){
+            $name=$_POST['name'];
+            $uname=$_POST['uname'];
+            $mail=$_POST['email'];
+            $mobile=$_POST['mobile'];
+            $pwrd=$_POST['pwrd'];
+            $repwrd=$_POST['repwrd'];
+            $addr=$_POST['addr'];
+            $dob=$_POST['dob'];
+            $vno=$_POST['vno'];
+            $workplace=$_POST['workplace'];
+            $desig=$_POST['desig'];
+            $gender=$_POST['gender'];
+            $vcat;
+            $cat;
+            $vcat=$_POST['cater'];
+
+            if (!$vcat==0) {
+              
+            
+            switch($vcat){
+              
+              case 1:
+              $cat="car";
+              break;
+
+              case 2:
+              $cat="van";
+              break;
+
+              case 3:
+              $cat="Motor Bicycle";
+              break;
+
+              case 4:
+              $cat="Three wheel";
+              break;
+
+              case 5:
+              $cat="other";
+              break;
+
+            }
+         
+
+
+
+            // vehicle number validation
+            if(preg_match("/^([a-zA-Z]{1,3}|((?!0*-)[0-9]{1,3}))-[0-9]{4}(?<!0{4})/m", $vno)){
+
+            // mobile number validation 
+            if(preg_match("/^[7]{1}[01245678]{1}[0-9]{7}$/", $mobile)){
+
+            // password check
+            if($pwrd==$repwrd){
+
+                $hash = password_hash($pwrd,PASSWORD_DEFAULT);
+
+
+
+                  $sqls = "SELECT * FROM users WHERE (username='$uname')";
+                  $sqlp="SELECT cus_mobile FROM customer WHERE (cus_mobile='$mobile')";
+                  $sqle = "SELECT cus_email FROM customer WHERE (cus_email='$mail')";
+                  $sqlv="SELECT cus_vno FROM customer WHERE (cus_vno='$vno')";
+
+        $result = mysqli_query($conn, $sqls);
+        $result1 = mysqli_query($conn, $sqlp);
+        $result2 = mysqli_query($conn, $sqle);
+        $result3 = mysqli_query($conn, $sqlv);
+       
+        if (mysqli_num_rows($result) === 1) {
+          
+         echo('<script>alert("Username already exist please try another !")
+            
+
+            </script>');
+
+
+          
+
+        }else{
+               
+                if (mysqli_num_rows($result1) === 1) {
+                    
+                  echo('<script>alert("Mobile number already exist please try another !")
+                   
+            
+
+            </script>');
+
+                }else{ 
+
+                if (mysqli_num_rows($result2) === 1) {
+
+                  echo('<script>alert("Email address already exist please try another !")
+            
+
+            </script>');
+
+                }else{
+
+
+               if (mysqli_num_rows($result3) === 1) {
+
+                  echo('<script>alert("Vehicle number already exist !")
+            
+
+            </script>');
+
+                }else{             
+
+               $sql="insert into customer values ('$name','$addr','$dob','$gender','$mail','$cat','$vno','$mobile','$workplace','$desig','')";
+               $quer="insert into users values ('','$uname','$hash','user')";
+
+               if(mysqli_query($conn,$sql)){
+
+                mysqli_query($conn,$quer);
+
+
+
+             echo('<script>alert("Registered succssfully !")
+            
+
+            </script>');
+           header('location: userLogin.php');
+
+      }
+    }
+    }
+    }
+    }
+            }else{ ?>
+
+              <script Type="javascript">alert("Re-Entered password is not matching with the password. Try Again!")</script>
+
+              <?php
+            }
+
+          }else{
+            echo '<script>alert("Invalid Mobile Number !")</script>';
+          }
+        }else{
+
+           echo '<script>alert("Invalid vehicle number !")</script>';
+        }
+
+         }else{
+            echo '<script>alert("Please select the vehicle type !")</script>';
+
+          }
+
+         
+
+
+          }
+
+      ?>
 
 
    </head>
@@ -168,57 +342,76 @@ form .user-details .input-box{
   </div>
     <div class="title">USER Registration</div>
     <div class="content">
-      <form action="#">
+      <form method="post">
         <div class="user-details">
           <div class="input-box">
             <span class="details">Full Name</span>
-            <input type="text" placeholder="Enter your name" required>
+            <input type="text" placeholder="Enter your name" required name="name">
           </div>
           <div class="input-box">
             <span class="details">Username</span>
-            <input type="text" placeholder="Enter your username" required>
+            <input type="text" placeholder="Enter your username" required name="uname">
           </div>
           <div class="input-box">
             <span class="details">Email</span>
-            <input type="text" placeholder="Enter your email" required>
+            <input type="text" placeholder="Enter your email" required name="email">
           </div>
           <div class="input-box">
             <span class="details">Phone Number</span>
-            <input type="text" placeholder="Enter your number" required>
+            <input type="text" placeholder="(+94)" required name="mobile">
           </div>
           <div class="input-box">
             <span class="details">Password</span>
-            <input type="text" placeholder="Enter your password" required>
+            <input type="password" placeholder="Enter your password" required name="pwrd">
           </div>
           <div class="input-box">
             <span class="details">Confirm Password</span>
-            <input type="text" placeholder="Confirm your password" required>
+            <input type="password" placeholder="Confirm your password" required name="repwrd">
           </div>
 
           <div class="input-box">
             <span class="details">Address</span>
-            <input type="text" placeholder="Enter Your Address" required>
+            <input type="text" placeholder="Enter Your Address" required name="addr">
           </div>
 
             <div class="input-box">
             <span class="details">Date of Birth</span>
-            <input type="date"  required>
+            <input type="date"  required name="dob">
+          </div>
+
+            <div class="input-box">
+            <span class="details">Vehicle Number</span>
+              <input type="text" placeholder="Enter Your Vehicle Number" required name="vno">
+              *Enter your vehicle number without letters of province. eg: WP
+          </div>
+
+          <div class="input-box">
+            <span class="details">Vehicle Category</span>
+             <select name="cater" required="">
+               <option selected>-- SELECT VEHICLE CATEGORY--</option>
+               <option value="1">CAR</option>
+               <option value="2">VAN</option>
+               <option value="3">MOTOR BIKE</option>
+               <option value="4">THREE WHEEL</option>
+               <option value="5">OTHER</option>
+
+             </select>
           </div>
 
           <div class="input-box">
             <span class="details">Working Place (optional)</span>
-            <input type="text" placeholder="Enter Your Working Place">
+            <input type="text" placeholder="Enter Your Working Place" name="workplace">
           </div>
 
             <div class="input-box">
             <span class="details">Designation (optional)</span>
-            <input type="text" placeholder="Enter Your Designation">
+            <input type="text" placeholder="Enter Your Designation" name="desig">
           </div>
         </div>
         <div class="gender-details">
-          <input type="radio" name="gender" id="dot-1">
-          <input type="radio" name="gender" id="dot-2">
-          <input type="radio" name="gender" id="dot-3">
+          <input type="radio" name="gender" id="dot-1" value="male">
+          <input type="radio" name="gender" id="dot-2" value="female">
+          <input type="radio" name="gender" id="dot-3" value="not-specified">
           <span class="gender-title">Gender</span>
           <div class="category">
             <label for="dot-1">
@@ -236,7 +429,7 @@ form .user-details .input-box{
           </div>
         </div>
         <div class="button">
-          <input type="submit" value="Register">
+          <input type="submit" value="Register" name="sub">
         </div>
       </form>
     </div>

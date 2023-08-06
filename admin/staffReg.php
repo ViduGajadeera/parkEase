@@ -1,7 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>ParkEase-STAFF REGISTRATION</title> 
+  <?php  
+
+
+session_start();
+ if(isset($_SESSION['username'])){ 
+  ?>
+  <title>ParkEase-STAFF REGISTRATION</title> 
               <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700' rel='stylesheet' type='text/css'>
               <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
               <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
@@ -40,23 +46,21 @@
 </table>
   </h1>
   <div class="nav-wrap">
-    <nav class="main-nav" role="navigation">
+       <nav class="main-nav" role="navigation">
       <ul class="unstyled list-hover-slide">
         <li><a href="home1.php">HOME</a></li>
         <li><a href="staffReg.php">STAFF REGISTRATION</a></li>
-        <li><a href="reservation.php">RESERVATIONS</a></li>
+        <li><a href="Areservation.php">RESERVATIONS</a></li>
+        <li><a href="RgateIn.php">RESERVATION - GATE IN</a></li>
         <li><a href="gateIn.php">GATE IN</a></li>
         <li><a href="gateOut.php">DEPARTURE</a></li>
         <li><a href="report.php">REPORTS</a></li>
+        <li><a href="pricing.php">PRICING</a></li>
         <li><a href="feedback.php">FEEDBACKS</a></li>
+         <li><a href="Alogout.php">LOGOUT</a></li>
       </ul>
     </nav>
-   <!-- <ul class="social-links list-inline unstyled list-hover-slide">
-      <li><a href="#">Twitter</a></li>
-      <li><a href="#">Google+</a></li>
-      <li><a href="#">GitHub</a></li>
-      <li><a href="#">CodePen</a></li>
-    </ul>-->
+   
   </div>
 </header>
 </div>
@@ -73,17 +77,7 @@
       </legend><br>
 
     
-           <div class="form-group">
-        <label class="col-md-4 control-label">SELECT EMPLOYEE TYPE</label> 
-
-        <div class="col-md-4 inputGroupContainer"> 
-          <div></div>
-          
-        <input type="radio" name="emptype" value="permanent"><b>PERMANENT </b> &nbsp&nbsp&nbsp <input type="radio" name="emptype" value="contract"> <b>CONTRACT </b>
-        
        
-        </div>
-      </div>
 
      
 
@@ -164,7 +158,29 @@
         <div class="col-md-4 inputGroupContainer">
           <div class="input-group">
             <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-            <input name="email" placeholder="EMAIL" class="form-control" type="text" required="">
+            <input name="email" placeholder="EMAIL" class="form-control" type="email" required="">
+          </div>
+        </div>
+      </div>
+
+
+        <div class="form-group">
+        <label class="col-md-4 control-label">USERNAME</label>
+        <div class="col-md-4 inputGroupContainer">
+          <div class="input-group">
+            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+            <input name="username" placeholder="USERNAME" class="form-control" type="text" required="">
+          </div>
+        </div>
+      </div>
+
+
+        <div class="form-group">
+        <label class="col-md-4 control-label">PASSWORD</label>
+        <div class="col-md-4 inputGroupContainer">
+          <div class="input-group">
+            <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+            <input name="password" placeholder="PASSWORD" class="form-control" type="password" required="">
           </div>
         </div>
       </div>
@@ -194,4 +210,10 @@
 </section>
 
 </body>
+<?php   
+}else{
+  header('location: admin_login.php');
+}
+
+?>
 </html>

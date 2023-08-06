@@ -17,7 +17,7 @@ switch($vcat){
     //update zoned set vehicleNo='', status='vacant' where reservationStatus='no';
 
 
-    $query="update zonea set vehicleNo='$vno', status='fill' where ((status='vacant') and reservationStatus='no') order by slotNumber limit 1";
+    $query="update zonea set status='fill' where ((vehicleNo='$vno') and reservationStatus='fill')";
     $show="select slotNumber from zonea where vehicleNo='$vno'";
  
     
@@ -27,7 +27,7 @@ switch($vcat){
     $zone="A";
     $catt="van";
      
-    $query="update zonea set vehicleNo='$vno', status='fill' where ((status='vacant') and reservationStatus='no') order by slotNumber limit 1";
+    $query="update zonea set status='fill' where ((vehicleNo='$vno') and reservationStatus='fill')";
     $show="select slotNumber from zonea where vehicleNo='$vno'";
     
     break; 
@@ -36,7 +36,7 @@ switch($vcat){
     $zone="B";
     $catt="Motor Bicycle";
      
-    $query="update zoneb set vehicleNo='$vno', status='fill' where ((status='vacant') and reservationStatus='no') order by slotNumber limit 1";
+    $query="update zoneb set status='fill' where ((vehicleNo='$vno') and reservationStatus='fill')";
     $show="select slotNumber from zoneb where vehicleNo='$vno'";
 
    
@@ -46,7 +46,7 @@ switch($vcat){
     $zone="C";
     $catt="Three wheel";
      
-    $query="update zonec set vehicleNo='$vno', status='fill' where ((status='vacant') and reservationStatus='no') order by slotNumber limit 1";
+    $query="update zonec set status='fill' where ((vehicleNo='$vno') and reservationStatus='fill')";
     $show="select slotNumber from zonec where vehicleNo='$vno'";
     
  
@@ -56,7 +56,7 @@ switch($vcat){
     $zone="D";
     $catt="other";
     
-    $query="update zoned set vehicleNo='$vno', status='fill' where ((status='vacant') and reservationStatus='no') order by slotNumber limit 1";
+    $query="update zoned set status='fill' where ((vehicleNo='$vno') and reservationStatus='fill')";
     $show="select slotNumber from zoned where vehicleNo='$vno'";
 
     break;    
@@ -76,7 +76,7 @@ $showw=mysqli_query($con,$show);
 
 
  ?>
-
+ <!-- Sending SMS -->
 
 
 
@@ -153,7 +153,7 @@ $showw=mysqli_query($con,$show);
 
                                          <?php  
 
-                                                        $sql3 = " SELECT * FROM customer";
+ $sql3 = " SELECT * FROM customer";
 
                                                      $result2 = mysqli_query($con, $sql3);
                                                      while( $row2 = mysqli_fetch_assoc($result2)) {
@@ -165,10 +165,8 @@ $showw=mysqli_query($con,$show);
                                                                 mysqli_query($con,$query2);
                                                                
 
-                                                    // sms code starts 
 
-
-                                                             /*   $custp =$customer['cus_mobile'];
+                                                               /* $custp =$customer['cus_mobile'];
                                                                 $cusName= $customer['cus_name'];
                                                                 $cusGen;
                                                                 if($customer['cus_gender']=="male"){
@@ -200,11 +198,9 @@ curl_setopt_array($curl, array(
 
 $response = curl_exec($curl);
 
-curl_close($curl); */
+curl_close($curl);*/
 //echo $response; 
-        
-
-        // sms code ends                                                               
+                                                                    
                                                                 }
                                                                 else {
                                                             $query3="insert into parked_vehicles values ('$vno','$catt','$dateT','$timeN','unregistered')";
