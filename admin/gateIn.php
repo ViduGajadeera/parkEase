@@ -4,9 +4,9 @@
   <?php  
   
 session_start();
+ 
 
-
-// automaticallt cancel reservation starts
+// automatically cancel reservation starts
 
   function clear(){
     include 'connection.php';

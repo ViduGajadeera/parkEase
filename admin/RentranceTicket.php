@@ -166,7 +166,7 @@ $showw=mysqli_query($con,$show);
                                                                
 
 
-                                                               /* $custp =$customer['cus_mobile'];
+                                                                $custp =$customer['cus_mobile'];
                                                                 $cusName= $customer['cus_name'];
                                                                 $cusGen;
                                                                 if($customer['cus_gender']=="male"){
@@ -174,7 +174,7 @@ $showw=mysqli_query($con,$show);
                                                                 }elseif ($customer['cus_gender']=="female") {
                                                                   $cusGen="Ms/Mrs.";   
                                                                 }
-
+/*
 
 
 $curl = curl_init();

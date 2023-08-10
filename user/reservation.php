@@ -33,7 +33,7 @@ session_start();
     $timef=$_POST['timef'];
     $timet=$_POST['timet'];
     
-   
+   if($timet>$timef){
 
 
 $sql = " SELECT * FROM customer where cus_id='$uid'";
@@ -72,6 +72,12 @@ $sql = " SELECT * FROM customer where cus_id='$uid'";
 
 }
 }
+}else{
+
+   echo '<script>alert("Invalid Time Slot!")</script>';
+
+}
+
 }
 
 

@@ -3,6 +3,46 @@
 <head>
   <?php  
 
+      function clear(){
+    include 'connection.php';
+  date_default_timezone_set("Asia/colombo");
+   $today=date("Y-m-d");
+  $now= date('H:i:s');
+
+  $vacant="select * from slot_reservation where reservation_date<'$today' or time_from<='$now'";
+   $ans = mysqli_query($conn, $vacant);
+          while( $line = mysqli_fetch_assoc($ans)) {
+          $arrs[]=$line;
+          foreach($arrs as $arr)
+
+          $vehicleno=$arr['vehicle_no'];
+          $catt=$arr['vCat'];
+
+          if($arr['vCat']=="car"){
+        $correct="update zonea set vehicleNo='', status='vacant', reservationStatus='no' where vehicleNo='$vehicleno' and status='vacant'";
+          mysqli_query($conn,$correct);
+
+        }else if($arr['vCat']=="van"){
+           $correct="update zonea set vehicleNo='', status='vacant', reservationStatus='no' where vehicleNo='$vehicleno' and status='vacant'";
+          mysqli_query($conn,$correct);
+        }else if($arr['vCat']=="Motor Bike"){
+           $correct="update zoneb set vehicleNo='', status='vacant', reservationStatus='no' where vehicleNo='$vehicleno' and status='vacant'";
+          mysqli_query($conn,$correct);
+        }else if($arr['vCat']=="Three Wheel"){
+           $correct="update zonec set vehicleNo='', status='vacant', reservationStatus='no' where vehicleNo='$vehicleno' and status='vacant'";
+          mysqli_query($conn,$correct);
+        }
+        else if($arr['vCat']=="Other"){
+           $correct="update zoned set vehicleNo='', status='vacant', reservationStatus='no' where vehicleNo='$vehicleno' and status='vacant'";
+          mysqli_query($conn,$correct);
+        }
+      }
+
+  $clear="update slot_reservation set status='Expired' where reservation_date<'$today' or time_from<='$now'";
+  mysqli_query($conn,$clear);
+  }
+
+
 
 session_start();
  if(isset($_SESSION['username'])){ 
@@ -201,7 +241,7 @@ section{
 
 
 </head>
-<body> 
+<body  <?php clear(); ?>> 
   <section>
   <div class="navbar navbar-inverse navbar-static-top">
     <div id="div">
@@ -303,6 +343,7 @@ section{
     </tbody>
     <?php   
         }
+      }
       
     ?>
   </table>
@@ -313,31 +354,7 @@ section{
   
   </section>      
 <?php 
-        switch ($reservation['zone']) {
-          case 'A':
-            $vno=$reservation['vehicle_no'];
-            $sql2="update zonea set vehicleNo='$vno', reservationStatus='fill' where ((status='vacant') and reservationStatus='no') order by slotNumber limit 1 ";
-            
-            break;
-          
-          case 'B':
-            $vno=$reservation['vehicle_no'];
-             $sql2="update zoneb set vehicleNo='$vno', reservationStatus='fill' where ((status='vacant') and reservationStatus='no') order by slotNumber limit 1 ";
-             
-            break;
 
-            case 'C':
-            $vno=$reservation['vehicle_no'];
-             $sql2="update zonec set vehicleNo='$vno', reservationStatus='fill' where ((status='vacant') and reservationStatus='no') order by slotNumber limit 1 ";
-              
-            break;
-
-            case 'D':
-            $vno=$reservation['vehicle_no'];
-             $sql2="update zoned set vehicleNo='$vno', reservationStatus='fill' where ((status='vacant') and reservationStatus='no') order by slotNumber limit 1 ";
-              
-            break;
-        }
 
 
 
@@ -345,14 +362,49 @@ section{
         $sql1 = "update slot_reservation set status='accepted' where reservation_id=$id";
         
    if(isset($_POST['acc'])) {
-             mysqli_query($conn, $sql1);
+
+
+               switch ($reservation['zone']) {
+          case 'Zone A':
+            $vno=$reservation['vehicle_no'];
+            $sql2="update zonea set vehicleNo='$vno', reservationStatus='fill' where ((status='vacant') and reservationStatus='no') order by slotNumber limit 1 ";
+             mysqli_query($conn, $sql2);
+            
+            break;
+          
+          case 'Zone B':
+            $vno=$reservation['vehicle_no'];
+             $sql2="update zoneb set vehicleNo='$vno', reservationStatus='fill' where ((status='vacant') and reservationStatus='no') order by slotNumber limit 1 ";
               mysqli_query($conn, $sql2);
+             
+            break;
+
+            case 'Zone C':
+            $vno=$reservation['vehicle_no'];
+             $sql2="update zonec set vehicleNo='$vno', reservationStatus='fill' where ((status='vacant') and reservationStatus='no') order by slotNumber limit 1 ";
+              mysqli_query($conn, $sql2);
+              
+            break;
+
+            case 'Zone D':
+            $vno=$reservation['vehicle_no'];
+             $sql2="update zoned set vehicleNo='$vno', reservationStatus='fill' where ((status='vacant') and reservationStatus='no') order by slotNumber limit 1 ";
+              mysqli_query($conn, $sql2);
+              
+            break;
+        }
+
+
+
+
+             mysqli_query($conn, $sql1);
+             
               ?>
 
                <script type="text/javascript">
                
                window.location.replace("Areservation.php");
-
+              //location.reload();
 
              </script>
 
@@ -367,7 +419,7 @@ section{
              header("Location: Areservation.php");
     exit();
         }
-}
+
 ?>
 
 </body>

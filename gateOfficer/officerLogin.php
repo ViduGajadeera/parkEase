@@ -133,7 +133,7 @@ session_start();
 
 if (isset($_POST['uname']) && isset($_POST['password'])) {
 
-    function validate($data){
+   function validate($data){
 
        $data = trim($data);
 
@@ -144,6 +144,7 @@ if (isset($_POST['uname']) && isset($_POST['password'])) {
        return $data;
 
     }
+  
 
     $uname = validate($_POST['uname']);
 
@@ -249,7 +250,7 @@ if (isset($_POST['uname']) && isset($_POST['password'])) {
          <form action="officerLogin.php" method="post">
             <div class="field">
                <div class="fas fa-user"></div>
-               <input type="text" placeholder="Email or Phone" name="uname">
+               <input type="text" placeholder="Username" name="uname">
             </div>
             <div class="field">
                <div class="fas fa-lock"></div>

@@ -191,6 +191,18 @@ select{
             $cat;
             $vcat=$_POST['cater'];
 
+
+            //age check 
+
+            $date2=date("d-m-Y");
+      $date1= new DateTime($dob);
+      $date2= new DateTime($date2);
+
+      $interval= $date1 ->diff($date2);
+      $age = $interval -> y;
+
+
+
             if (!$vcat==0) {
               
             
@@ -227,8 +239,11 @@ select{
             // mobile number validation 
             if(preg_match("/^[7]{1}[01245678]{1}[0-9]{7}$/", $mobile)){
 
+                 if($age>=18){
+
             // password check
             if($pwrd==$repwrd){
+
 
                 $hash = password_hash($pwrd,PASSWORD_DEFAULT);
 
@@ -294,7 +309,7 @@ select{
 
 
 
-             echo('<script>alert("Registered succssfully !")
+             echo('<script>alert("Registered successfully !")
             
 
             </script>');
@@ -311,6 +326,14 @@ select{
 
               <?php
             }
+
+
+          }else{
+
+    echo '<script>alert("Invalid age !")</script>';
+
+  }
+
 
           }else{
             echo '<script>alert("Invalid Mobile Number !")</script>';

@@ -141,7 +141,7 @@ button:hover{
                                                             $officers[]=$row;
                                                             foreach($officers as $officer)
                                                                $offtp =$officer['emp_contat'];
-/*		  
+		  
 $curl = curl_init();
 
 curl_setopt_array($curl, array(
@@ -163,7 +163,7 @@ curl_setopt_array($curl, array(
 
 $response = curl_exec($curl);
 
-curl_close($curl); */
+curl_close($curl); 
 //echo $response;
 
 $_SESSION['otp']=$otp;

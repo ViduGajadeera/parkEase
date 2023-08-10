@@ -153,7 +153,7 @@ $showw=mysqli_query($con,$show);
 
                                          <?php  
 
-                                                        $sql3 = " SELECT * FROM customer";
+                                                        $sql3 = " SELECT * FROM customer where cus_vno='$vno'";
 
                                                      $result2 = mysqli_query($con, $sql3);
                                                      while( $row2 = mysqli_fetch_assoc($result2)) {
@@ -165,10 +165,10 @@ $showw=mysqli_query($con,$show);
                                                                 mysqli_query($con,$query2);
                                                                
 
-                                                    // sms code starts 
+                                                     
 
-
-                                                             /*   $custp =$customer['cus_mobile'];
+                                                                
+                                                                $custp =$customer['cus_mobile'];
                                                                 $cusName= $customer['cus_name'];
                                                                 $cusGen;
                                                                 if($customer['cus_gender']=="male"){
@@ -200,11 +200,11 @@ curl_setopt_array($curl, array(
 
 $response = curl_exec($curl);
 
-curl_close($curl); */
+curl_close($curl); 
 //echo $response; 
         
 
-        // sms code ends                                                               
+                                                                      
                                                                 }
                                                                 else {
                                                             $query3="insert into parked_vehicles values ('$vno','$catt','$dateT','$timeN','unregistered')";

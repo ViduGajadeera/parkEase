@@ -7,7 +7,7 @@
       <link rel="stylesheet" href="style.css">
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
 <style type="text/css">
-
+ 
       @import url('https://fonts.googleapis.com/css?family=Poppins&display=swap');
 *{
   margin: 0;
@@ -249,7 +249,7 @@ if (isset($_POST['uname']) && isset($_POST['password'])) {
          <form action="admin_login.php" method="post">
             <div class="field">
                <div class="fas fa-user"></div>
-               <input type="text" placeholder="Email or Phone" name="uname">
+               <input type="text" placeholder="Usename" name="uname">
             </div>
             <div class="field">
                <div class="fas fa-lock"></div>

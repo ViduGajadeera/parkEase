@@ -236,12 +236,7 @@ section{
       
       </ul>
     </nav>
-   <!-- <ul class="social-links list-inline unstyled list-hover-slide">
-      <li><a href="#">Twitter</a></li>
-      <li><a href="#">Google+</a></li>
-      <li><a href="#">GitHub</a></li>
-      <li><a href="#">CodePen</a></li>
-    </ul>-->
+   
   </div>
 </header>
 </div>

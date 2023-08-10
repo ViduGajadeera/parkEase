@@ -5,6 +5,48 @@
 
 
 session_start();
+
+       function clear(){
+    include 'connection.php';
+  date_default_timezone_set("Asia/colombo");
+   $today=date("Y-m-d");
+  $now= date('H:i:s');
+
+  $vacant="select * from slot_reservation where reservation_date<'$today' or time_from<='$now'";
+   $ans = mysqli_query($conn, $vacant);
+          while( $line = mysqli_fetch_assoc($ans)) {
+          $arrs[]=$line;
+          foreach($arrs as $arr)
+
+          $vehicleno=$arr['vehicle_no'];
+          $catt=$arr['vCat'];
+
+          if($arr['vCat']=="car"){
+        $correct="update zonea set vehicleNo='', status='vacant', reservationStatus='no' where vehicleNo='$vehicleno' and status='vacant'";
+          mysqli_query($conn,$correct);
+
+        }else if($arr['vCat']=="van"){
+           $correct="update zonea set vehicleNo='', status='vacant', reservationStatus='no' where vehicleNo='$vehicleno' and status='vacant'";
+          mysqli_query($conn,$correct);
+        }else if($arr['vCat']=="Motor Bike"){
+           $correct="update zoneb set vehicleNo='', status='vacant', reservationStatus='no' where vehicleNo='$vehicleno' and status='vacant'";
+          mysqli_query($conn,$correct);
+        }else if($arr['vCat']=="Three Wheel"){
+           $correct="update zonec set vehicleNo='', status='vacant', reservationStatus='no' where vehicleNo='$vehicleno' and status='vacant'";
+          mysqli_query($conn,$correct);
+        }
+        else if($arr['vCat']=="Other"){
+           $correct="update zoned set vehicleNo='', status='vacant', reservationStatus='no' where vehicleNo='$vehicleno' and status='vacant'";
+          mysqli_query($conn,$correct);
+        }
+      }
+
+  $clear="update slot_reservation set status='Expired' where reservation_date<'$today' or time_from<='$now'";
+  mysqli_query($conn,$clear);
+  }
+
+
+
  if(isset($_SESSION['username'])){ 
   ?>
 	<title>ParkEase-ENTRANCE</title> 
@@ -200,7 +242,7 @@ display_c5()
 
 
 </head>
-<body onload=display_ct5();> 
+<body onload=display_ct5();<?php clear(); ?>> 
 	<section>
 	<div class="navbar navbar-inverse navbar-static-top">
 		<div id="div">

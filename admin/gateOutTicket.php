@@ -21,7 +21,7 @@ $delquery="select * from parked_vehicles where vehicle_no='$vno'";
 
                                                             case 'car':
                                                             $zone="zonea";
-                                                            $del="update zonea set status='vacant', reservationStatus='no', vehicleNo='' where ((vehicleNo='$vno') and status='fill') order by slotNumber limit 1";
+                                                           $del="update zonea set status='vacant', reservationStatus='no', vehicleNo='' where ((vehicleNo='$vno') and status='fill') order by slotNumber limit 1";
                                                             break;
 
                                                              case 'van':
@@ -303,7 +303,8 @@ $delquery="select * from parked_vehicles where vehicle_no='$vno'";
                                             }
                                         }
 
-
+                                                $delete="delete from parked_vehicles where vehicle_no='$vno'";
+                                                 mysqli_query($conn, $delete);
                                               
 
                                              ?>

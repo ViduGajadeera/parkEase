@@ -11,6 +11,19 @@
       $password=$_POST['password'];
       $egender;
     
+// age validation
+      $date2=date("d-m-Y");
+      $date1= new DateTime($dob);
+      $date2= new DateTime($date2);
+
+      $interval= $date1 ->diff($date2);
+      $age = $interval -> y;
+
+
+
+
+
+
       $hash = password_hash($password,PASSWORD_DEFAULT);
 
       if($gender=="male"){
@@ -20,6 +33,11 @@
       }
 
        if(preg_match("/^[7]{1}[01245678]{1}[0-9]{7}$/", $contact)){
+
+
+        if($age>=18){
+
+
 
         $sqls = "SELECT * FROM staff WHERE (username='$username')";
          $sqlp="SELECT emp_contat FROM staff_registration WHERE (emp_contat='$contact')";
@@ -80,11 +98,21 @@
     }
     }
     }
+
+  }else{
+
+    echo '<script>alert("Invalid age !")</script>';
+
+  }
+
     }else{
       echo '<script>alert("Invalid Mobile Number !")</script>';
 
 
     }
+
+          
+
   }
 
 
